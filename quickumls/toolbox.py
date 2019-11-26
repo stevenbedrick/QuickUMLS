@@ -223,9 +223,9 @@ class CuiSemTypesDB(object):
             raise IOError(err_msg)
 
         self.cui_db = plyvel.DB(
-            os.path.join(path, 'cui.leveldb'))
+            os.path.join(path, 'cui.leveldb'), create_if_missing=True)
         self.semtypes_db = plyvel.DB(
-            os.path.join(path, 'semtypes.leveldb'))
+            os.path.join(path, 'semtypes.leveldb'), create_if_missing=True)
 
     def has_term(self, term):
         term = prepare_string_for_db_input(safe_unicode(term))
