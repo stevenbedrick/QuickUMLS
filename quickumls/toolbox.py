@@ -11,7 +11,7 @@ from six.moves import xrange
 
 # installed modules
 import numpy
-import leveldb
+import plyvel
 
 # project imports
 from quickumls_simstring import simstring
@@ -222,9 +222,9 @@ class CuiSemTypesDB(object):
                 '"{}" is not a valid directory').format(path)
             raise IOError(err_msg)
 
-        self.cui_db = leveldb.LevelDB(
+        self.cui_db = plyvel.DB(
             os.path.join(path, 'cui.leveldb'))
-        self.semtypes_db = leveldb.LevelDB(
+        self.semtypes_db = plyvel.DB(
             os.path.join(path, 'semtypes.leveldb'))
 
     def has_term(self, term):

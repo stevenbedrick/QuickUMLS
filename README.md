@@ -8,6 +8,8 @@ For more details on how QuickUMLS works, we remand to our paper.
 
 This project should be compatible with Python 3 (Python 2 is [no longer supported](https://pythonclock.org/)) and run on any UNIX system (support for Windows is experimental, please report bugs!). **If you find any bugs, please file an issue on GitHub or email the author at luca@ir.cs.georgetown.edu**.
 
+This fork of the project uses [plyvel](https://github.com/wbolster/plyvel) instead of the original Python [py-leveldb](https://github.com/rjpower/py-leveldb), which I could not get to compile outside of Anaconda.
+
 ## Installation
 
 1. **Obtain a UMLS installation** This tool requires you to have a valid UMLS installation on disk. To install UMLS, you must first obtain a [license](https://uts.nlm.nih.gov/license.html) from the National Library of Medicine; then you should download all UMLS files from [this page](https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html); finally, you can install UMLS using the [MetamorphoSys](https://www.nlm.nih.gov/pubs/factsheets/umlsmetamorph.html) tool as [explained in this guide](https://www.nlm.nih.gov/research/umls/implementation_resources/metamorphosys/help.html).  The installation can be removed once the system has been initialized.
@@ -19,7 +21,6 @@ This project should be compatible with Python 3 (Python 2 is [no longer supporte
     - `-E` / `--language`: Specify the language to consider for UMLS concepts; by default, English is used. For a complete list of languages, please see [this table provided by NLM](https://www.nlm.nih.gov/research/umls/knowledge_sources/metathesaurus/release/abbreviations.html#LAT).
 
 
-**†**: If the installation fails on macOS when using Anaconda, install `leveldb` first by running `conda install -c conda-forge python-leveldb`.
 
 ## APIs
 
