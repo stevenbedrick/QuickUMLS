@@ -230,7 +230,7 @@ class CuiSemTypesDB(object):
     def has_term(self, term):
         term = prepare_string_for_db_input(safe_unicode(term))
         try:
-            self.cui_db.Get(db_key_encode(term))
+            self.cui_db.get(db_key_encode(term))
             return True
         except KeyError:
             return
@@ -242,28 +242,28 @@ class CuiSemTypesDB(object):
         # some terms have multiple cuis associated with them,
         # so we store them all
         try:
-            cuis = pickle.loads(self.cui_db.Get(db_key_encode(term)))
+            cuis = pickle.loads(self.cui_db.get(db_key_encode(term)))
         except KeyError:
             cuis = set()
 
         cuis.add((cui, is_preferred))
-        self.cui_db.Put(db_key_encode(term), pickle.dumps(cuis))
+        self.cui_db.put(db_key_encode(term), pickle.dumps(cuis))
 
         try:
-            self.semtypes_db.Get(db_key_encode(cui))
+            self.semtypes_db.get(db_key_encode(cui))
         except KeyError:
-            self.semtypes_db.Put(
+            self.semtypes_db.put(
                 db_key_encode(cui), pickle.dumps(set(semtypes))
             )
 
     def get(self, term):
         term = prepare_string_for_db_input(safe_unicode(term))
 
-        cuis = pickle.loads(self.cui_db.Get(db_key_encode(term)))
+        cuis = pickle.loads(self.cui_db.get(db_key_encode(term)))
         matches = (
             (
                 cui,
-                pickle.loads(self.semtypes_db.Get(db_key_encode(cui))),
+                pickle.loads(self.semtypes_db.get(db_key_encode(cui))),
                 is_preferred
             )
             for cui, is_preferred in cuis
