@@ -242,7 +242,10 @@ class CuiSemTypesDB(object):
         # some terms have multiple cuis associated with them,
         # so we store them all
         try:
-            cuis = pickle.loads(self.cui_db.get(db_key_encode(term)))
+            from_cui_db = self.cui_db.get(db_key_encode(term))
+            if from_cui_db is None:
+                raise KeyError()
+            cuis = pickle.loads(from_cui_db)
         except KeyError:
             cuis = set()
 
